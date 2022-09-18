@@ -1,4 +1,4 @@
-package com.edu.ulab.app.Repository;
+package com.edu.ulab.app.repository;
 
 import com.edu.ulab.app.entity.UserEntity;
 

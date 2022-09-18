@@ -1,6 +1,6 @@
-package com.edu.ulab.app.Repository.Impl;
+package com.edu.ulab.app.repository.impl;
 
-import com.edu.ulab.app.Repository.BookRepository;
+import com.edu.ulab.app.repository.BookRepository;
 import com.edu.ulab.app.entity.BookEntity;
 import com.edu.ulab.app.storage.Storage;
 import org.springframework.stereotype.Service;

@@ -79,7 +79,7 @@ public class UserDataFacade {
                 .toList();
         log.info("Update book ids: {}", bookIdList);
 
-        //Добавить в ответ все книги пользователя
+        //Возможно необходимо добавить в ответ все книги пользователя
         return UserBookResponse.builder()
                 .userId(updatedUser.getId())
                 .booksIdList(bookIdList)
@@ -108,7 +108,9 @@ public class UserDataFacade {
         log.info("Found user books: {}", bookDto);
         for (BookDto book : bookDto) {
             bookService.deleteBookById(book.getId());
+            log.info("Deleted book with id=: {}", book.getId());
         }
         userService.deleteUserById(userId);
+        log.info("Deleted user with id=: {}", userId);
     }
 }

@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping(value = "/create")
     @Operation(summary = "Create user book row.",
             responses = {
-                    @ApiResponse(description = "User book",
+                    @ApiResponse(description = "UserId and booksId",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = UserBookResponse.class)))})
     public UserBookResponse createUserWithBooks(@RequestBody UserBookRequest request,
@@ -44,7 +44,7 @@ public class UserController {
     @PutMapping(value = "/update/{userId}")
     @Operation(summary = "Update user with books.",
             responses = {
-                    @ApiResponse(description = "Update user",
+                    @ApiResponse(description = "Update user and added books",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = UserBookResponse.class)))})
     public UserBookResponse updateUserWithBooks(@RequestBody UserBookRequest request, @PathVariable Long userId) {
@@ -55,9 +55,8 @@ public class UserController {
 
     @GetMapping(value = "/get/{userId}")
     @Operation(summary = "Get user with books.",
-            //parameters = {@Parameter(in = ParameterIn.PATH)},
             responses = {
-                    @ApiResponse(description = "Get user",
+                    @ApiResponse(description = "Get userId and his booksId",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = UserBookResponse.class)))})
     public UserBookResponse getUserWithBooks(@PathVariable Long userId) {
@@ -68,9 +67,11 @@ public class UserController {
 
     @DeleteMapping(value = "/delete/{userId}")
     @Operation(summary = "Delete user.",
-            responses = {@ApiResponse(responseCode = "User deleted")})
-    public void deleteUserWithBooks(@PathVariable Long userId) {
+            responses = {@ApiResponse(responseCode = "200", description = "User with id has been deleted.",
+                    content = @Content(mediaType = MediaType.TEXT_MARKDOWN_VALUE))})
+    public String deleteUserWithBooks(@PathVariable Long userId) {
         log.info("Delete user and his books:  userId {}", userId);
         userDataFacade.deleteUserWithBooks(userId);
+        return "User with id=" + userId + " has been deleted";
     }
 }

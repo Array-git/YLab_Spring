@@ -1,8 +1,9 @@
 package com.edu.ulab.app.service.impl;
 
-import com.edu.ulab.app.Repository.UserRepository;
+import com.edu.ulab.app.repository.UserRepository;
 import com.edu.ulab.app.dto.UserDto;
 import com.edu.ulab.app.entity.UserEntity;
+import com.edu.ulab.app.exception.NotFoundException;
 import com.edu.ulab.app.mapper.UserEntityMapper;
 import com.edu.ulab.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,25 +34,15 @@ public class UserServiceImpl implements UserService {
     public UserDto updateUser(UserDto userDto) {
         UserEntity userEntity = userEntityMapper.userDtoToUserEntity(userDto);
         userDto = userEntityMapper.userEntityToUserDto(userRepository.updateUser(userEntity));
-        //UserEntity userEntity = userRepository.findUserById(userDto.getId());
-        //If user not exist, create new user
-/*        if (userEntity == null) {
-            userEntity = new UserEntity();
-            userEntity.setTitle(userDto.getTitle());
-            userEntity.setFullName(userDto.getFullName());
-            userEntity.setAge(userDto.getAge());
-            userRepository.createUser(userEntity);
-        }*/
-/*        userEntity.setTitle(userDto.getTitle());
-        userEntity.setFullName(userDto.getFullName());
-        userEntity.setAge(userDto.getAge());
-        userDto.setId(userEntity.getId());*/
         return userDto;
     }
 
     @Override
     public UserDto getUserById(Long id) {
         UserEntity userEntity = userRepository.findUserById(id);
+        if (userEntity == null) {
+            throw new NotFoundException("User with id=" + id + " not found!");
+        }
         return userEntityMapper.userEntityToUserDto(userEntity);
     }
 

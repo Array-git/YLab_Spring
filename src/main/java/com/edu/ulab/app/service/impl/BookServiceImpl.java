@@ -1,6 +1,6 @@
 package com.edu.ulab.app.service.impl;
 
-import com.edu.ulab.app.Repository.BookRepository;
+import com.edu.ulab.app.repository.BookRepository;
 import com.edu.ulab.app.dto.BookDto;
 import com.edu.ulab.app.entity.BookEntity;
 import com.edu.ulab.app.mapper.BookEntityMapper;
@@ -34,8 +34,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto updateBook(BookDto bookDto) {
-        //BookEntity bookEntity = storage.updateBooks(bookDto);
-        //bookDto.setId(bookEntity.getId());
         return null;
     }
 
