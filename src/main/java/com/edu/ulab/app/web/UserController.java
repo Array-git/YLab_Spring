@@ -1,5 +1,6 @@
 package com.edu.ulab.app.web;
 
+import com.edu.ulab.app.exception.NotFoundException;
 import com.edu.ulab.app.facade.UserDataFacade;
 import com.edu.ulab.app.web.constant.WebConstant;
 import com.edu.ulab.app.web.request.UserBookRequest;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import static com.edu.ulab.app.web.constant.WebConstant.REQUEST_ID_PATTERN;
@@ -59,7 +61,7 @@ public class UserController {
                     @ApiResponse(description = "Get userId and his booksId",
                             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(implementation = UserBookResponse.class)))})
-    public UserBookResponse getUserWithBooks(@PathVariable Long userId) {
+    public UserBookResponse getUserWithBooks(@PathVariable @NotNull Long userId) {
         UserBookResponse response = userDataFacade.getUserWithBooks(userId);
         log.info("Response with user and his books: {}", response);
         return response;
