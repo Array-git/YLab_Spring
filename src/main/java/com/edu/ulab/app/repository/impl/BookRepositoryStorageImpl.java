@@ -1,7 +1,7 @@
 package com.edu.ulab.app.repository.impl;
 
 import com.edu.ulab.app.entity.BookEntity;
-import com.edu.ulab.app.repository.BookRepository;
+import com.edu.ulab.app.repository.BookRepositoryStorage;
 import com.edu.ulab.app.storage.Storage;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookRepositoryImpl implements BookRepository {
+public class BookRepositoryStorageImpl implements BookRepositoryStorage {
     private final Storage storage;
 
-    public BookRepositoryImpl(Storage storage) {
+    public BookRepositoryStorageImpl(Storage storage) {
         this.storage = storage;
     }
 
     @Override
-    public BookEntity createBook(BookEntity book) {
+    public BookEntity save(BookEntity book) {
         return storage.saveBook(book);
     }
 
