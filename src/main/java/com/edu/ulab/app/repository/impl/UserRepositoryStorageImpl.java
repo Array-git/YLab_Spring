@@ -1,20 +1,20 @@
 package com.edu.ulab.app.repository.impl;
 
 import com.edu.ulab.app.entity.UserEntity;
-import com.edu.ulab.app.repository.UserRepository;
+import com.edu.ulab.app.repository.UserRepositoryStorage;
 import com.edu.ulab.app.storage.Storage;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryStorageImpl implements UserRepositoryStorage {
     private final Storage storage;
 
-    public UserRepositoryImpl(Storage storage) {
+    public UserRepositoryStorageImpl(Storage storage) {
         this.storage = storage;
     }
 
     @Override
-    public UserEntity createUser(UserEntity user) {
+    public UserEntity save(UserEntity user) {
         return storage.saveUser(user);
     }
 
