@@ -53,6 +53,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookDto> getBooksByUserId(Long userId) {
         return  bookRepository.findBooksByUserId(userId).stream()
+                .peek(b -> log.info("Found book from userId={}: {}", userId, b))
                 .map(bookMapper::bookToBookDto)
                 .peek(bookDto -> log.info("Mapped BookDto from list Book: {}", bookDto))
                 .toList();
@@ -61,6 +62,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteBookById(Long id) {
         bookRepository.deleteById(id);
-        log.info("Deleted user with id=: {}", id);
+        //log.info("Deleted user with id=: {}", id);
     }
 }
