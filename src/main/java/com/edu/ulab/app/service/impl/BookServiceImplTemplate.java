@@ -21,7 +21,6 @@ import java.util.Objects;
 @Slf4j
 @Service
 public class BookServiceImplTemplate implements BookService {
-
     private final JdbcTemplate jdbcTemplate;
     private final BookMapper bookMapper;
 
@@ -60,7 +59,6 @@ public class BookServiceImplTemplate implements BookService {
 
     @Override
     public BookDto getBookById(Long id) {
-        // реализовать недстающие методы
         //нет endpoints, где передается id книги
         return null;
     }
@@ -68,13 +66,12 @@ public class BookServiceImplTemplate implements BookService {
     @Override
     public List<BookDto> getBooksByUserId(Long userId) {
         final String SELECT_BY_ID = "SELECT * FROM BOOK WHERE USER_ID=?";
-        List<BookDto> bookList = jdbcTemplate.query(SELECT_BY_ID, new BeanPropertyRowMapper<>(Book.class), userId)
+        return jdbcTemplate.query(SELECT_BY_ID, new BeanPropertyRowMapper<>(Book.class), userId)
                 .stream()
                 .peek(b -> log.info("Found book from userId={}: {}", userId, b))
                 .map(bookMapper::bookToBookDto)
                 .peek(bookDto -> log.info("Mapped BookDto from list Book: {}", bookDto))
                 .toList();
-        return bookList;
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.edu.ulab.app.service.impl;
 
-import com.edu.ulab.app.repository.UserRepositoryStorage;
 import com.edu.ulab.app.dto.UserDto;
 import com.edu.ulab.app.entity.UserEntity;
 import com.edu.ulab.app.exception.NotFoundException;
 import com.edu.ulab.app.mapper.UserEntityMapper;
+import com.edu.ulab.app.repository.UserRepositoryStorage;
 import com.edu.ulab.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class UserServiceImplStorage implements UserService {
         UserEntity gotUserEntity = userRepository.findUserById(userEntity.getId());
         if (gotUserEntity == null) {
             gotUserEntity = userRepository.save(userEntity);
-        } else{
+        } else {
             gotUserEntity.setFullName(userEntity.getFullName());
             gotUserEntity.setTitle(userEntity.getTitle());
             gotUserEntity.setAge(userEntity.getAge());

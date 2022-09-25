@@ -3,7 +3,6 @@ package com.edu.ulab.app.service.impl;
 import com.edu.ulab.app.dto.UserDto;
 import com.edu.ulab.app.entity.Person;
 import com.edu.ulab.app.exception.NotFoundException;
-import com.edu.ulab.app.mapper.PersonMapper;
 import com.edu.ulab.app.mapper.UserMapper;
 import com.edu.ulab.app.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -54,8 +53,7 @@ public class UserServiceImplTemplate implements UserService {
             jdbcTemplate.update("UPDATE PERSON SET TITLE=?, FULL_NAME=?, AGE=? WHERE id=?",
                     userDto.getTitle(), userDto.getFullName(), userDto.getAge(), userDto.getId());
             log.info("Updated user: {}", userDto);
-        }
-        catch (NotFoundException ignored){
+        } catch (NotFoundException ignored) {
             gotUser = createUser(userDto);
         }
         return gotUser;
@@ -74,7 +72,7 @@ public class UserServiceImplTemplate implements UserService {
 
     @Override
     public void deleteUserById(Long id) {
-        if(getUserById(id)!=null){
+        if (getUserById(id) != null) {
             final String DELETE_BY_ID = "DELETE FROM PERSON WHERE ID=?";
             jdbcTemplate.update(DELETE_BY_ID, id);
             //log.info("Deleted user with id=: {}", id);

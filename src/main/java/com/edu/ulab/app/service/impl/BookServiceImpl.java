@@ -4,7 +4,6 @@ import com.edu.ulab.app.dto.BookDto;
 import com.edu.ulab.app.entity.Book;
 import com.edu.ulab.app.mapper.BookMapper;
 import com.edu.ulab.app.repository.BookRepository;
-import com.edu.ulab.app.repository.BookRepositoryStorage;
 import com.edu.ulab.app.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,14 +44,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto getBookById(Long id) {
-        // реализовать недстающие методы
         //нет endpoints, где передается id книги
         return null;
     }
 
     @Override
     public List<BookDto> getBooksByUserId(Long userId) {
-        return  bookRepository.findBooksByUserId(userId).stream()
+        return bookRepository.findBooksByUserId(userId).stream()
                 .peek(b -> log.info("Found book from userId={}: {}", userId, b))
                 .map(bookMapper::bookToBookDto)
                 .peek(bookDto -> log.info("Mapped BookDto from list Book: {}", bookDto))
